@@ -1,71 +1,71 @@
-Class Student{
-Private string name;
-Private int rollNo;
-Private int marks;
-Student(string name,int rollNo,int marks){
-this.name=name;
-this.rollNo=rollNo;
-this.marks=marks;
-}
-public string getname(){
-return name;
-}
-public int getrollNo(){
-return rollNO;
-}
-public int getmarks(){
-return marks;
-}
-public void setname(string name){
-this.name=name;
-}
-public void setrollNo(rollNo){
-this.rollNo=rollNo;
-}
-public void setmarks(marks){
-this.marks=marks;
-}
-public string calculateGrade(){
-return"Grade Not Assigned";
-}
-public void displayDetails(){
-System.out.println("Student Name:"+name);
-System.out.println("Roll Number:",+rollNo);
-System.out.println("Marks:",+marks);
-System.out.println("Grade:"+calculateGrade());
-}
-}
-Class Result extends Student{
-Result(String name,int rollNo,int marks){
-super(name,rollNo,marks);
-}
-@Override
-public String calculateGrade(){
-int marks=getmarks();
-if(marks>=90)
-return "A+";
-else if(marks>=80)
-return "A";
-else if(marks>=70)
-return "B";
-else if(marks>=60)
-return "C";
-else if(marks>=50)
-return "D";
-else
-return "F";
-}
-}
-public class Studentmanagement{
-public static void main(String[]args){
-Result s1=new Result("Rahul",101,96);
-Result s2=new Result("Priya",102,50);
-Result s3=new Result("Arun",103,75);
-s1.displayDetails();
-System.out.println("----------------------------");
-s2.displayDetails();
-System.out.println("----------------------------");
-s3.displayDetails();
-System.out.println("----------------------------");
-}
-}
+class Student{
+    private String name;
+    private int rollNo;
+    private int marks;
+    Student(String name,int rollNo,int marks){
+    this.name=name;
+    this.rollNo=rollNo;
+    this.marks=marks;
+    }
+    public String getname(){
+    return name;
+    }
+    public int getrollNo(){
+    return rollNo;
+    }
+    public int getmarks(){
+    return marks;
+    }
+    public void setname(String name){
+    this.name=name;
+    }
+    public void setrollNo(int rollNo){
+    this.rollNo=rollNo;
+    }
+    public void setmarks(int marks){
+    this.marks=marks;
+    }
+    public String calculateGrade1(){
+    return"Grade Not Assigned";
+    }
+    public void displayDetails(){
+    System.out.println("Student Name:"+name);
+    System.out.println("RollNo:"+rollNo);
+    System.out.println("Marks:"+marks);
+    System.out.println("Grade:"+calculateGrade1());
+    }
+    }
+    class Result extends Student{
+    Result(String name,int rollNo,int marks){
+    super(name,rollNo,marks);
+    }
+    @Override
+    public String calculateGrade1(){
+    int marks=getmarks();
+    if(marks>=90)
+    return "A+";
+    else if(marks>=80)
+    return "A";
+    else if(marks>=70)
+    return "B";
+    else if(marks>=60)
+    return "C";
+    else if(marks>=50)
+    return "D";
+    else
+    return "F";
+    }
+    }
+    public class Studentmanagement{
+    public static void main(String[]args){
+    Result s1=new Result("Rahul",101,96);
+    Result s2=new Result("Priya",102,50);
+    Result s3=new Result("Arun",103,75);
+    s1.displayDetails();
+    System.out.println("----------------------------");
+    s2.displayDetails();
+    System.out.println("----------------------------");
+    s3.displayDetails();
+    System.out.println("----------------------------");
+    }
+    }
