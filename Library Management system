@@ -8,45 +8,154 @@ class Book {
         this.id = id;
         this.name = name;
     }
+
+    void display() {
+        System.out.println(id + " - " + name);
+    }
 }
 
 public class BookManagement {
-    public static void main(String[] args) {
 
-        ArrayList<Book> list = new ArrayList<>();
-        HashMap<Integer, Book> map = new HashMap<>();
+    static ArrayList<Book> list = new ArrayList<>();
+    static HashMap<Integer, Book> map = new HashMap<>();
+    static Scanner sc = new Scanner(System.in);
 
-        Book b1 = new Book(101, "Java");
-        Book b2 = new Book(102, "Python");
+    // ADD
+    static void addBook() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
 
-        list.add(b1);
-        list.add(b2);
+        System.out.print("Enter Book Name: ");
+        String name = sc.nextLine();
 
-        map.put(b1.id, b1);
-        map.put(b2.id, b2);
+        Book b = new Book(id, name);
 
-        System.out.println("Books:");
-        for (Book b : list)
-            System.out.println(b.id + " - " + b.name);
+        list.add(b);
+        map.put(id, b);
 
-        Book b = map.get(101);
-        System.out.println("\nDetails: " + b.id + " - " + b.name);
+        System.out.println("Book added!");
+    }
 
-        b.name = "Advanced Java";
-        System.out.println("Updated: " + b.name);
+    // VIEW - Enhanced for loop
+    static void viewBooks() {
+        System.out.println("\n--- Book List ---");
+
+        for (Book b : list) {
+            b.display();
+        }
+    }
+
+    // UPDATE
+    static void updateBook() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        Book b = map.get(id);
+
+        if (b != null) {
+            System.out.print("Enter New Book Name: ");
+            b.name = sc.nextLine();
+
+            System.out.println("Book updated!");
+        } else {
+            System.out.println("Book not found!");
+        }
+    }
+
+    // DETAILS - HashMap lookup
+    static void details() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
+
+        Book b = map.get(id);
+
+        if (b != null)
+            b.display();
+        else
+            System.out.println("Book not found!");
+    }
+
+    // DELETE - Iterator
+    static void deleteBook() {
+        System.out.print("Enter Book ID: ");
+        int id = sc.nextInt();
 
         Iterator<Book> it = list.iterator();
 
         while (it.hasNext()) {
-            Book x = it.next();
+            Book b = it.next();
 
-            if (x.id == 102) {
+            if (b.id == id) {
                 it.remove();
-                map.remove(102);
+                map.remove(id);
+
+                System.out.println("Book deleted!");
+                return;
             }
         }
-        System.out.println("\nAfter Delete:");
-        for (Book x : list)
-            System.out.println(x.id + " - " + x.name);
+
+        System.out.println("Book not found!");
+    }
+
+    public static void main(String[] args) {
+
+        // 4 default books
+        Book b1 = new Book(101, "Java");
+        Book b2 = new Book(102, "Python");
+        Book b3 = new Book(103, "C Programming");
+        Book b4 = new Book(104, "Data Structures");
+
+        list.add(b1);
+        list.add(b2);
+        list.add(b3);
+        list.add(b4);
+
+        map.put(101, b1);
+        map.put(102, b2);
+        map.put(103, b3);
+        map.put(104, b4);
+
+        int choice;
+
+        do {
+            System.out.println("\n===== BOOK MANAGEMENT =====");
+            System.out.println("1. Add Book");
+            System.out.println("2. View Books");
+            System.out.println("3. Update Book");
+            System.out.println("4. Book Details");
+            System.out.println("5. Delete Book");
+            System.out.println("6. Exit");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    addBook();
+                    break;
+                case 2:
+                    viewBooks();
+                    break;
+                case 3:
+                    updateBook();
+                    break;
+                case 4:
+                    details();
+                    break;
+                case 5:
+                    deleteBook();
+                    break;
+                case 6:
+                    System.out.println("Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+        } while (choice != 6);
+
+        sc.close();
     }
 }
